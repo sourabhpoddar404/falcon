@@ -3,8 +3,10 @@ version: "3.4"
 services:
 
   device-registry:
-    build: .
-    volumes:
-      - .:/usr/src/app
+    image: falcon
+    networks:
+      - falcon-net
     ports:
       - 5000:80
+networks:
+  falcon-net:

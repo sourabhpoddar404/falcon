@@ -1,6 +1,5 @@
 pyqt5==5.12
 pyqtwebengine==5.12.1
-pathlib
 ruamel-yaml
 wrapt==1.12.1
 idna==2.10

@@ -17,7 +17,7 @@ from multiprocessing.pool import ThreadPool
 import statistics
 from difflib import SequenceMatcher
 import spacy
-nlp = spacy.load('en')
+nlp = spacy.load("en_core_web_sm")
 
 dbpediaSPARQL="http://node1.research.tib.eu:4001/sparql"
 dbpediaSPARQL2="http://node1.research.tib.eu:4001/sparql"

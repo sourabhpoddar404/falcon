@@ -16,7 +16,7 @@ RUN mkdir -p /var/www \
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-python -m spacy download en
+RUN python -m spacy download en
 
 COPY . .
 

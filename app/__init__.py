@@ -8,8 +8,8 @@ def hello():
     result = list(main.evaluate(["What is the capital of India"]))
     relations = result[2]
     response = {
-        "relations_dbpedia" : relations
+        "relations_dbpedia" : json.dump(relations)
     }
-    resposnejson = json.loads(response)
+    resposnejson = json.dumps(response)
     return resposnejson
 

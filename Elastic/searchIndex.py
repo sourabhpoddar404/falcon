@@ -1,7 +1,7 @@
 from elasticsearch import Elasticsearch
 
 
-es = Elasticsearch(['http://localhost:9200'])
+es = Elasticsearch(['http://172.18.0.1:9200'])
 docType = "doc"
 
 

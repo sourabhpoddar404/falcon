@@ -1,13 +1,8 @@
-version: "3.4"
+version: "3.9"
 
 services:
 
   device-registry:
-    network_mode: host
     image: falcon
-    networks:
-      - falcon-net
     ports:
-      - 5000:80
-networks:
-  falcon-net:
+      - 5000:8281

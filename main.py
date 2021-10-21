@@ -19,8 +19,8 @@ from difflib import SequenceMatcher
 import spacy
 nlp = spacy.load("en_core_web_sm")
 
-dbpediaSPARQL="http://node1.research.tib.eu:4001/sparql"
-dbpediaSPARQL2="http://node1.research.tib.eu:4001/sparql"
+dbpediaSPARQL="https://dbpedia.org/sparql"
+dbpediaSPARQL2="https://dbpedia.org/sparql"
 stopWordsList=stopwords.getStopWords()
 comparsion_words=stopwords.getComparisonWords()
 
@@ -639,7 +639,7 @@ def split_bas_on_comparison(combinations):
 
 def evaluate(raw):
     
-    evaluation=True
+    evaluation=False
     startTime=time.time()
     oneQuestion=False
     global correctRelations

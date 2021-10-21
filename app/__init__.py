@@ -5,7 +5,7 @@ app =  Flask(__name__)
 
 @app.route("/")
 def hello():
-    result = main.evaluate(["What is the capital of India"])
+    result = list(main.evaluate(["What is the capital of India"]))
     relations = result[2]
     response = {
         "relations_dbpedia" : relations

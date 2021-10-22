@@ -10,8 +10,10 @@ def hello():
     result = list(main.evaluate([question]))
     print(result)
     relations = result[2]
+    entities = result[3]
     response = {
-        "relations_dbpedia" : relations
+        "relations_dbpedia" : relations,
+        "entities_dbpedia" : entities
     }
     resposnejson = json.dumps(response)
     return resposnejson

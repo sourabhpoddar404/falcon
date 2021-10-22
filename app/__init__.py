@@ -1,14 +1,17 @@
 import json
 from flask import Flask
+from flask import request
 import main
 app =  Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=['POST'])
 def hello():
-    result = list(main.evaluate(["What is the capital of India"]))
+    question = request.json['text']
+    result = list(main.evaluate([question]))
+    print(result)
     relations = result[2]
     response = {
-        "relations_dbpedia" : json.dump(relations)
+        "relations_dbpedia" : relations
     }
     resposnejson = json.dumps(response)
     return resposnejson

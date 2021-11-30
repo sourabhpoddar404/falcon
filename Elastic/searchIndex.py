@@ -2,7 +2,7 @@ from elasticsearch import Elasticsearch
 
 
 es = Elasticsearch(['http://172.18.0.1:9200'])
-
+docType = "doc"
 
 
 
@@ -10,7 +10,7 @@ def entitySearch(query):
     indexName = "dbentityindex"
     results=[]
     ###################################################
-    elasticResults=es.search(index=indexName, body={
+    elasticResults=es.search(index=indexName,doc_type=docType, body={
               "query": {
                 "prefix" : { "uri" : "http://dbpedia.org/resource/"+query.capitalize().replace(" ", "_") } 
               }
@@ -25,7 +25,7 @@ def entitySearch(query):
         else:
             results.append([result["_source"]["label"],result["_source"]["uri"],result["_score"]*10,0])
         ###################################################
-    elasticResults=es.search(index=indexName, body={
+    elasticResults=es.search(index=indexName, doc_type=docType,  body={
               "query": {
                 "match" : { "uri" : "http://dbpedia.org/resource/"+query.capitalize().replace(" ", "_") } 
               }
@@ -38,7 +38,7 @@ def entitySearch(query):
         else:
             results.append([result["_source"]["label"],result["_source"]["uri"],result["_score"]*20,0])
         ###################################################
-    elasticResults=es.search(index=indexName, body={
+    elasticResults=es.search(index=indexName, doc_type=docType, body={
               "query": {
                 "match" : { "label" : query } 
               }
@@ -51,7 +51,7 @@ def entitySearch(query):
         else:
             results.append([result["_source"]["label"],result["_source"]["uri"],result["_score"]*40,0])
     ###################################################
-    elasticResults=es.search(index=indexName, body={
+    elasticResults=es.search(index=indexName, doc_type=docType, body={
               "query": {
                 "fuzzy" : { "label" : query  } 
               }
@@ -75,7 +75,7 @@ def ontologySearch(query):
     indexName = "dbontologyindex"
     results=[]
     ###################################################
-    elasticResults=es.search(index=indexName, body={
+    elasticResults=es.search(index=indexName, doc_type=docType, body={
               "query": {
                 "prefix" : { "uri" : "http://dbpedia.org/ontology/"+query.replace(" ", "_") } 
               }
@@ -88,7 +88,7 @@ def ontologySearch(query):
         else:
             results.append([result["_source"]["label"],result["_source"]["uri"],result["_score"]*10,0])
         ###################################################
-    elasticResults=es.search(index=indexName, body={
+    elasticResults=es.search(index=indexName, doc_type=docType, body={
               "query": {
                 "match" : { "uri" : "http://dbpedia.org/ontology/"+query.replace(" ", "_") } 
               }
@@ -101,7 +101,7 @@ def ontologySearch(query):
         else:
             results.append([result["_source"]["label"],result["_source"]["uri"],result["_score"]*20,0])
         ###################################################
-    elasticResults=es.search(index=indexName, body={
+    elasticResults=es.search(index=indexName, doc_type=docType, body={
               "query": {
                 "match" : { "label" : query } 
               }
@@ -114,7 +114,7 @@ def ontologySearch(query):
         else:
             results.append([result["_source"]["label"],result["_source"]["uri"],result["_score"]*40,0])
     ###################################################
-    elasticResults=es.search(index=indexName, body={
+    elasticResults=es.search(index=indexName, doc_type=docType, body={
               "query": {
                 "fuzzy" : { "label" : query  } 
               }
@@ -135,7 +135,7 @@ def ontologySearch(query):
 def classSearch(query):
     indexName = "dbclassindex"
     results=[]
-    elasticResults=es.search(index=indexName, body={
+    elasticResults=es.search(index=indexName, doc_type=docType, body={
             "query": {
         "bool": {
             "must": {
@@ -161,13 +161,13 @@ def classSearch(query):
 def propertySearch(query):
     indexName = "dbpropertyindex"
     results=[]
-    elasticResults=es.search(index=indexName, body={
+    elasticResults=es.search(index=indexName, doc_type=docType, body={
             "query": {
         "bool": {
             "must": {
                 "bool" : { "should": [
                       { "multi_match": { "query": query , "fields": ["label"]  }},
-                      { "multi_match": { "query": "http://dbpedia.org/property/"+query.replace(" ", "") , "fields": ["uri"] , "fuzziness": "AUTO"}} ] }
+                      { "multi_match": { "query": "http://dbpedia.org/ontology/"+query.replace(" ", "") , "fields": ["uri"] , "fuzziness": "AUTO"}} ] }
             }
         }
     }

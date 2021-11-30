@@ -19,8 +19,8 @@ from difflib import SequenceMatcher
 import spacy
 nlp = spacy.load("en_core_web_sm")
 
-dbpediaSPARQL="https://dbpedia.org/sparql"
-dbpediaSPARQL2="https://dbpedia.org/sparql"
+dbpediaSPARQL="http://172.18.0.1:8890/sparql"
+dbpediaSPARQL2="http://172.18.0.1:8890/sparql"
 stopWordsList=stopwords.getStopWords()
 comparsion_words=stopwords.getComparisonWords()
 
